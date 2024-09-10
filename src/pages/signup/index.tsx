@@ -54,8 +54,6 @@ const Signup = () => {
       date: 0,
     });
 
-    setDisabled(true);
-
     // Check if username is entered
     if (username == undefined || username.length <= 0) {
       console.log('Username empty');
@@ -105,18 +103,16 @@ const Signup = () => {
       return;
     }
 
-    setDisabled(false);
-
     // Go to edit-profile page
     router.push('edit-profile');
   };
 
   return (
-    <div className="lg:min-h-screen flex  w-full bg-none lg:bg-bgwhite bg-hovercta bg-opacity-10">
+    <div className="lg:min-h-[90vh] flex items-start w-full bg-hovercta bg-opacity-10">
       {/* Left Div */}
-      <div className="min-h-screen mt-5 lg:mt-0 lg:h-full lg:min-h-[88vh] pb-10 flex-1 flex justify-center items-center">
+      <div className="mt-5 no-scrollbar overflow-hidden lg:mt-0 lg:h-full lg:min-h-[88vh] pb-10 flex-1 flex justify-center items-center">
         {/* Sign Up Form Div */}
-        <div className="bg-white min-w-[23rem] border-[1px] -translate-y-5 md:-translate-y-0 px-8 md:w-[65%] mt-5 md:mt-14 lg:mt-5 p-5 md:px-20 shadow-xl rounded-xl pb-10">
+        <div className="bg-white min-w-[23rem] w-[80%] border-[1px] -translate-y-5 md:-translate-y-0 px-8 md:w-[65%] mt-5 md:mt-14 lg:mt-5 p-5 md:px-16 shadow-xl rounded-xl pb-10">
           {/* Title */}
           <h1 className="text-ink bg-gradient-to-r from-cta to-hovercta bg-clip-text text-transparent font-bold text-2xl mt-5 text-center">
             Sign Up
@@ -240,14 +236,14 @@ const Signup = () => {
               className="w-full"
               disabled={disabled}
               disabledText="Please Wait..."
-              text={'Log in'}
+              text={'Sign up'}
             />
           </div>
         </div>
       </div>
 
       {/* Image Div - displayed only on laptop */}
-      <div className="hidden lg:flex lg:flex-1 items-center justify-center">
+      <div className="hidden lg:flex lg:flex-1 justify-center items-start pt-36">
         <img
           src="https://res.cloudinary.com/do8rpl9l4/image/upload/v1725973140/signup_dbhrkw.svg"
           className="max-w-[70%] pointer-events-none"

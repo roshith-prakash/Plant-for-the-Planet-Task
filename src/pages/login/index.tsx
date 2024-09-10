@@ -47,7 +47,7 @@ const Login = () => {
   console.log(password);
 
   return (
-    <div className="lg:min-h-screen flex items-center w-full bg-none lg:bg-bgwhite bg-green-700 bg-opacity-10">
+    <div className="lg:min-h-[90vh] flex items-center w-full bg-none lg:bg-bgwhite bg-green-700 bg-opacity-10">
       {/* Image Div - displayed only on laptop */}
       <div className="hidden lg:flex lg:flex-1 items-center justify-center">
         <img
@@ -59,7 +59,7 @@ const Login = () => {
       {/* Right Div */}
       <div className="min-h-screen mt-5 lg:mt-0 lg:h-full lg:min-h-[88vh] pb-10 flex-1 flex justify-center items-center">
         {/* Login Form Div */}
-        <div className="bg-white min-w-[23rem] border-[1px] -translate-y-5 md:-translate-y-0 px-8 md:w-[65%] mt-5 md:mt-14 lg:mt-5 p-5 md:px-20 shadow-xl rounded-xl pb-10">
+        <div className="bg-white min-w-[23rem] w-[80%] border-[1px] -translate-y-5 md:-translate-y-0 px-8 md:w-[65%] mt-5  lg:mt-5 p-5 md:px-20 shadow-xl rounded-xl pb-10">
           {/* Title */}
           <h1 className="text-ink bg-gradient-to-r from-cta to-hovercta bg-clip-text text-transparent font-bold text-2xl mt-5 text-center">
             Log in
