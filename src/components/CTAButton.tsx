@@ -6,8 +6,8 @@ const CTAButton = ({
   onClick,
 }: {
   text: string;
-  disabled: boolean;
-  disabledText: string;
+  disabled?: boolean;
+  disabledText?: string;
   className?: string;
   onClick: () => void;
 }) => {
