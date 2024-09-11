@@ -62,7 +62,7 @@ const Login = () => {
         <div className="bg-white min-w-[23rem] w-[80%] border-[1px] -translate-y-5 md:-translate-y-0 px-8 md:w-[65%] mt-5  lg:mt-5 p-5 md:px-20 shadow-xl rounded-xl pb-10">
           {/* Title */}
           <h1 className="text-ink bg-gradient-to-r from-cta to-hovercta bg-clip-text text-transparent font-bold text-2xl mt-5 text-center">
-            Log in
+          🌳 Log in 🌳
           </h1>
 
           {/* Username Input field */}
