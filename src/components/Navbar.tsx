@@ -5,6 +5,7 @@ import { useState } from 'react';
 const Navbar = () => {
   // To open the popout div
   const [open, setOpen] = useState<boolean>(false);
+
   return (
     <div
       className={`relative top-0 w-full font-inter shadow-md overflow-hidden bg-white flex justify-between items-center px-5 lg:px-10 py-5 z-10 max-w-screen`}
@@ -13,10 +14,10 @@ const Navbar = () => {
       <Link className="flex items-center gap-x-2" href="/">
         <img
           src="https://res.cloudinary.com/do8rpl9l4/image/upload/v1725986240/plant_d1wkt7.png"
-          alt="The Thought Journal"
+          alt="Plant for the Planet"
           className="h-10 w-10 md:h-10 md:w-10 cursor-pointer bg-transparent -translate-y-0.5"
         ></img>
-        <p className="mx-1 italic font-medium text-lg  md:text-xl text-cta">
+        <p className="mx-1 italic font-medium text-lg  md:text-xl text-transparent bg-gradient-to-b from-cta to-hovercta bg-clip-text">
           Plant for the Planet
         </p>
       </Link>
@@ -26,16 +27,30 @@ const Navbar = () => {
         {/* Search Icon - takes to search page. */}
 
         {/* Link to signup page */}
-        <Link href="/signup" className="hidden lg:block">
+        <Link
+          href="/signup"
+          className="hidden lg:block hover:text-cta cursor-pointer transition-all"
+        >
           Sign up
         </Link>
 
         {/* Link to login page */}
-        <Link href="/login" className="hidden lg:block">
+        <Link
+          href="/login"
+          className="hidden lg:block hover:text-cta cursor-pointer transition-all"
+        >
           Login
         </Link>
 
-        {/* Contains Popup for account & Hamburger button. */}
+        {/* Link to profile page */}
+        <Link
+          href="/edit-profile"
+          className="hidden lg:block hover:text-cta cursor-pointer transition-all"
+        >
+          Profile
+        </Link>
+
+        {/* Contains Hamburger button to open popout div. */}
         <div className="flex items-center gap-x-5">
           <div className="lg:hidden flex items-center gap-x-5">
             <RxHamburgerMenu
@@ -57,10 +72,10 @@ const Navbar = () => {
           <div className="flex items-center">
             <img
               src="https://res.cloudinary.com/do8rpl9l4/image/upload/v1725986240/plant_d1wkt7.png"
-              alt="Logo"
+              alt="Plant for the Planet"
               className="h-10 w-10 md:h-10 md:w-10 cursor-pointer bg-transparent -translate-y-0.5"
             ></img>
-            <p className="mx-2 italic font-medium text-lg md:text-lg text-cta">
+            <p className="mx-2 italic font-medium text-lg md:text-lg text-transparent bg-gradient-to-b from-cta to-hovercta bg-clip-text">
               Plant for the Planet
             </p>
           </div>
@@ -74,18 +89,18 @@ const Navbar = () => {
           {/* Link to Home */}
           <p className="my-2">
             <Link
+              onClick={() => setOpen(false)}
               href="/"
               className="hover:text-cta cursor-pointer transition-all"
             >
               Home
             </Link>
           </p>
-          {/* Link to create post page - not shown if already on create post page */}
 
           {/* Link to signup page */}
-
           <p className="my-2">
             <Link
+              onClick={() => setOpen(false)}
               href="/signup"
               className="hover:text-cta cursor-pointer transition-all"
             >
@@ -94,13 +109,24 @@ const Navbar = () => {
           </p>
 
           {/* Link to login page */}
-
           <p className="my-2">
             <Link
+              onClick={() => setOpen(false)}
               href="/login"
               className="hover:text-cta cursor-pointer transition-all"
             >
               Log in
+            </Link>
+          </p>
+
+          {/* Link to edit-profile page */}
+          <p className="my-2">
+            <Link
+              onClick={() => setOpen(false)}
+              href="/edit-profile"
+              className="hover:text-cta cursor-pointer transition-all"
+            >
+              Profile
             </Link>
           </p>
         </div>

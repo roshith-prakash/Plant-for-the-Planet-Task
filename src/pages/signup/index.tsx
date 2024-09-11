@@ -14,6 +14,8 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { isValidEmail } from '@/utils/validation';
+import toast from 'react-hot-toast';
+import { GiPineTree } from 'react-icons/gi';
 
 const Signup = () => {
   const router = useRouter();
@@ -103,8 +105,14 @@ const Signup = () => {
       return;
     }
 
+    console.log(description);
+    setDisabled(true);
+    setDisabled(false);
+
     // Go to edit-profile page
-    router.push('edit-profile');
+    // router.push('edit-profile');
+
+    toast.success('Profile updated!');
   };
 
   return (
@@ -114,8 +122,9 @@ const Signup = () => {
         {/* Sign Up Form Div */}
         <div className="bg-white min-w-[23rem] w-[80%] border-[1px] -translate-y-5 md:-translate-y-0 px-8 md:w-[65%] mt-5 md:mt-14 lg:mt-5 p-5 md:px-16 shadow-xl rounded-xl pb-10">
           {/* Title */}
-          <h1 className="text-ink bg-gradient-to-r from-cta to-hovercta bg-clip-text text-transparent font-bold text-2xl mt-5 text-center">
-          🌳 Sign Up 🌳
+          <h1 className="flex justify-center items-center gap-x-2 bg-gradient-to-r from-cta to-hovercta bg-clip-text text-transparent font-bold text-2xl mt-5 text-center">
+            <GiPineTree className="text-hovercta" /> Sign Up{' '}
+            <GiPineTree className="text-hovercta" />
           </h1>
 
           {/* Name Input field */}
@@ -196,23 +205,13 @@ const Signup = () => {
                 <SelectValue placeholder="Select your Gender" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="Male">Male</SelectItem>
-                <SelectItem value="Female">Female</SelectItem>
+                <SelectItem value="male">Male</SelectItem>
+                <SelectItem value="female">Female</SelectItem>
               </SelectContent>
             </Select>
             {error.gender == 1 && (
               <ErrorStatement text={'Please select your gender.'} />
             )}
-          </div>
-
-          {/* Description Input field */}
-          <div className="mt-8 px-2">
-            <p className="font-medium">Description</p>
-            <TextArea
-              value={username}
-              onChange={(e) => setDescription(e.target.value)}
-              placeholder={'Enter your description'}
-            />
           </div>
 
           {/* Input for date of birth */}
@@ -227,6 +226,16 @@ const Signup = () => {
             {error.date == 1 && (
               <ErrorStatement text={'Please select your date of birth.'} />
             )}
+          </div>
+
+          {/* Description Input field */}
+          <div className="mt-8 px-2">
+            <p className="font-medium">Description</p>
+            <TextArea
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              placeholder={'Enter your description'}
+            />
           </div>
 
           {/* Submit Button */}
@@ -244,7 +253,7 @@ const Signup = () => {
 
       {/* Image Div - displayed only on laptop */}
       <div className="hidden lg:flex lg:flex-1 justify-center items-start">
-        <img 
+        <img
           src="https://res.cloudinary.com/do8rpl9l4/image/upload/v1725973140/signup_dbhrkw.svg"
           className="max-w-[70%] pointer-events-none"
         />

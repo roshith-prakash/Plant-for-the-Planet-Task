@@ -11,6 +11,12 @@ const config: Config = {
     extend: {
       backgroundImage: {
         tree: "url('https://res.cloudinary.com/do8rpl9l4/image/upload/v1725970240/db650813e7bf612fd5fac80ca12e986c_lkycux.jpg')",
+        index1:
+          "url('https://res.cloudinary.com/do8rpl9l4/image/upload/v1726052403/OIG1_1_jot9d1.jpg')",
+        index2:
+          "url('https://res.cloudinary.com/do8rpl9l4/image/upload/v1726052402/OIG1_zt8ufv.jpg')",
+        index3:
+          "url('https://res.cloudinary.com/do8rpl9l4/image/upload/v1726054051/trees-minimalism-4k_huksth.png')",
       },
       colors: {
         error: '#db3a2e',
