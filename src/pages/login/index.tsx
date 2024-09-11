@@ -44,13 +44,10 @@ const Login = () => {
     router.push('edit-profile');
   };
 
-  console.log(username);
-  console.log(password);
-
   return (
-    <div className="lg:min-h-screen flex items-center w-full bg-hovercta bg-opacity-10">
+    <div className="min-h-screen flex items-center w-full bg-hovercta bg-opacity-10">
       {/* Image Div - displayed only on laptop */}
-      <div className="hidden lg:flex lg:flex-1 items-center justify-center">
+      <div className="hidden animate__animated animate__fadeInUp lg:flex lg:flex-1 items-center justify-center">
         <img
           src="https://res.cloudinary.com/do8rpl9l4/image/upload/v1725972725/login_iesapr.svg"
           className="max-w-[70%] pointer-events-none"
@@ -58,9 +55,9 @@ const Login = () => {
       </div>
 
       {/* Right Div */}
-      <div className="min-h-screen -translate-y-10 lg:translate-y-0 lg:mt-0 lg:h-full lg:min-h-[88vh] pb-10 flex-1 flex justify-center items-center">
+      <div className="min-h-screen  -translate-y-10 lg:translate-y-0 lg:mt-0 lg:h-full lg:min-h-[88vh] pb-10 flex-1 flex justify-center items-center">
         {/* Login Form Div */}
-        <div className="bg-white min-w-[23rem] w-[80%] border-[1px] -translate-y-5 md:-translate-y-0 px-8 md:w-[65%] mt-5  lg:mt-5 p-5 md:px-20 shadow-xl rounded-xl pb-10">
+        <div className=" bg-white animate__animated animate__fadeInUp  min-w-[23rem] max-w-[98%] w-[80%] border-[1px] -translate-y-5 md:-translate-y-0 px-8 md:w-[65%] mt-5  lg:mt-5 p-5 md:px-20 shadow-xl rounded-xl pb-10">
           {/* Title */}
           <h1 className="flex justify-center items-center gap-x-2 bg-gradient-to-r from-cta to-hovercta bg-clip-text text-transparent font-bold text-2xl mt-5 text-center">
             <GiPineTree className="text-hovercta" /> Login{' '}

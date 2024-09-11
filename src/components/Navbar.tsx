@@ -11,25 +11,28 @@ const Navbar = () => {
       className={`relative top-0 w-full font-inter shadow-md overflow-hidden bg-white flex justify-between items-center px-5 lg:px-10 py-5 z-10 max-w-screen`}
     >
       {/* Logo on the left side - linked to home page */}
-      <Link className="flex items-center gap-x-2" href="/">
+      <Link
+        className="animate__animated animate__fadeInLeft flex items-center gap-x-2"
+        href="/"
+      >
         <img
           src="https://res.cloudinary.com/do8rpl9l4/image/upload/v1725986240/plant_d1wkt7.png"
           alt="Plant for the Planet"
           className="h-10 w-10 md:h-10 md:w-10 cursor-pointer bg-transparent -translate-y-0.5"
         ></img>
-        <p className="mx-1 italic font-medium text-lg  md:text-xl text-transparent bg-gradient-to-b from-cta to-hovercta bg-clip-text">
+        <p className="mx-1 italic font-medium text-lg  md:text-xl text-textcta">
           Plant for the Planet
         </p>
       </Link>
 
       {/* Links at the right side - displayed on larger screens */}
-      <div className="flex gap-x-5 lg:gap-x-8 font-medium items-center">
+      <div className="animate__animated animate__fadeInRight text-lg flex gap-x-5 lg:gap-x-8 font-medium items-center">
         {/* Search Icon - takes to search page. */}
 
         {/* Link to signup page */}
         <Link
           href="/signup"
-          className="hidden lg:block hover:text-cta cursor-pointer transition-all"
+          className="hidden lg:block hover:text-textcta cursor-pointer transition-all"
         >
           Sign up
         </Link>
@@ -37,7 +40,7 @@ const Navbar = () => {
         {/* Link to login page */}
         <Link
           href="/login"
-          className="hidden lg:block hover:text-cta cursor-pointer transition-all"
+          className="hidden lg:block hover:text-textcta cursor-pointer transition-all"
         >
           Login
         </Link>
@@ -45,7 +48,7 @@ const Navbar = () => {
         {/* Link to profile page */}
         <Link
           href="/edit-profile"
-          className="hidden lg:block hover:text-cta cursor-pointer transition-all"
+          className="hidden lg:block hover:text-textcta cursor-pointer transition-all"
         >
           Profile
         </Link>
@@ -75,7 +78,7 @@ const Navbar = () => {
               alt="Plant for the Planet"
               className="h-10 w-10 md:h-10 md:w-10 cursor-pointer bg-transparent -translate-y-0.5"
             ></img>
-            <p className="mx-2 italic font-medium text-lg md:text-lg text-transparent bg-gradient-to-b from-cta to-hovercta bg-clip-text">
+            <p className="mx-2 italic font-medium text-lg md:text-lg text-textcta">
               Plant for the Planet
             </p>
           </div>
@@ -91,7 +94,7 @@ const Navbar = () => {
             <Link
               onClick={() => setOpen(false)}
               href="/"
-              className="hover:text-cta cursor-pointer transition-all"
+              className="hover:text-textcta cursor-pointer transition-all"
             >
               Home
             </Link>
@@ -102,7 +105,7 @@ const Navbar = () => {
             <Link
               onClick={() => setOpen(false)}
               href="/signup"
-              className="hover:text-cta cursor-pointer transition-all"
+              className="hover:text-textcta cursor-pointer transition-all"
             >
               Sign up
             </Link>
@@ -113,7 +116,7 @@ const Navbar = () => {
             <Link
               onClick={() => setOpen(false)}
               href="/login"
-              className="hover:text-cta cursor-pointer transition-all"
+              className="hover:text-textcta cursor-pointer transition-all"
             >
               Log in
             </Link>
@@ -124,7 +127,7 @@ const Navbar = () => {
             <Link
               onClick={() => setOpen(false)}
               href="/edit-profile"
-              className="hover:text-cta cursor-pointer transition-all"
+              className="hover:text-textcta cursor-pointer transition-all"
             >
               Profile
             </Link>

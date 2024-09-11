@@ -107,9 +107,9 @@ const EditProfile = () => {
 
   return (
     <div className="lg:min-h-screen relative flex items-center w-full bg-hovercta bg-opacity-10">
-      {/* Left Div */}
-      <div className="mt-5 no-scrollbar overflow-hidden lg:mt-0 lg:h-full lg:min-h-[88vh] pb-10 flex-1 flex justify-center items-center">
-        {/* Sign Up Form Div */}
+      {/* Main Div */}
+      <div className="mt-5 no-scrollbar animate__animated animate__fadeInUp overflow-hidden lg:mt-0 lg:h-full lg:min-h-[88vh] pb-10 flex-1 flex justify-center items-center">
+        {/* Profile Edit Div */}
         <div className="bg-white min-w-[23rem] w-[80%] border-[1px] -translate-y-5 md:-translate-y-0 px-8 md:w-[65%] mt-5 md:mt-14 lg:mt-5 p-5 md:px-16 shadow-xl rounded-xl pb-10">
           {/* Title */}
           <h1 className="flex justify-center items-center gap-x-2 bg-gradient-to-r from-cta to-hovercta bg-clip-text text-transparent font-bold text-2xl mt-5 text-center">
@@ -190,11 +190,11 @@ const EditProfile = () => {
 
           {/* Input for date of birth */}
           <div className="mt-8 px-2">
-            <p className="font-medium">Date Of Birth</p>
+            <p className="font-medium mb-5">Date Of Birth</p>
             <input
               value={dateOfBirth}
               type="date"
-              className="w-full border-b-2 mt-3"
+              className="bg-transparent w-full border-b-2 mt-3"
               onChange={(e) => setDateOfBirth(e.target.value)}
             />
             {error.date == 1 && (

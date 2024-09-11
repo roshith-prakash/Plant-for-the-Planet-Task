@@ -22,6 +22,7 @@ const config: Config = {
         error: '#db3a2e',
         cta: '#67af31',
         hovercta: '#067d47',
+        textcta: '#678b18',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {
