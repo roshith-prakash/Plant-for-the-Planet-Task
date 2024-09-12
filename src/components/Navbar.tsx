@@ -1,10 +1,12 @@
 import Link from 'next/link';
 import { RxCross2, RxHamburgerMenu } from 'react-icons/rx';
 import { useState } from 'react';
+import { useDBUser } from '@/context/userContext';
 
 const Navbar = () => {
   // To open the popout div
   const [open, setOpen] = useState<boolean>(false);
+  const context = useDBUser();
 
   return (
     <div
@@ -30,28 +32,34 @@ const Navbar = () => {
         {/* Search Icon - takes to search page. */}
 
         {/* Link to signup page */}
-        <Link
-          href="/signup"
-          className="hidden lg:block hover:text-textcta cursor-pointer transition-all"
-        >
-          Sign up
-        </Link>
+        {!context?.dbUser?.username && (
+          <Link
+            href="/signup"
+            className="hidden lg:block hover:text-textcta cursor-pointer transition-all"
+          >
+            Sign up
+          </Link>
+        )}
 
         {/* Link to login page */}
-        <Link
-          href="/login"
-          className="hidden lg:block hover:text-textcta cursor-pointer transition-all"
-        >
-          Login
-        </Link>
+        {!context?.dbUser?.username && (
+          <Link
+            href="/login"
+            className="hidden lg:block hover:text-textcta cursor-pointer transition-all"
+          >
+            Login
+          </Link>
+        )}
 
         {/* Link to profile page */}
-        <Link
-          href="/edit-profile"
-          className="hidden lg:block hover:text-textcta cursor-pointer transition-all"
-        >
-          Profile
-        </Link>
+        {!context?.dbUser?.username && (
+          <Link
+            href="/edit-profile"
+            className="hidden lg:block hover:text-textcta cursor-pointer transition-all"
+          >
+            Profile
+          </Link>
+        )}
 
         {/* Contains Hamburger button to open popout div. */}
         <div className="flex items-center gap-x-5">
@@ -90,6 +98,7 @@ const Navbar = () => {
         </div>
         <div className="px-8 mt-20 text-2xl flex flex-col gap-y-3">
           {/* Link to Home */}
+
           <p className="my-2">
             <Link
               onClick={() => setOpen(false)}
@@ -101,37 +110,43 @@ const Navbar = () => {
           </p>
 
           {/* Link to signup page */}
-          <p className="my-2">
-            <Link
-              onClick={() => setOpen(false)}
-              href="/signup"
-              className="hover:text-textcta cursor-pointer transition-all"
-            >
-              Sign up
-            </Link>
-          </p>
+          {!context?.dbUser?.username && (
+            <p className="my-2">
+              <Link
+                onClick={() => setOpen(false)}
+                href="/signup"
+                className="hover:text-textcta cursor-pointer transition-all"
+              >
+                Sign up
+              </Link>
+            </p>
+          )}
 
           {/* Link to login page */}
-          <p className="my-2">
-            <Link
-              onClick={() => setOpen(false)}
-              href="/login"
-              className="hover:text-textcta cursor-pointer transition-all"
-            >
-              Log in
-            </Link>
-          </p>
+          {!context?.dbUser?.username && (
+            <p className="my-2">
+              <Link
+                onClick={() => setOpen(false)}
+                href="/login"
+                className="hover:text-textcta cursor-pointer transition-all"
+              >
+                Log in
+              </Link>
+            </p>
+          )}
 
           {/* Link to edit-profile page */}
-          <p className="my-2">
-            <Link
-              onClick={() => setOpen(false)}
-              href="/edit-profile"
-              className="hover:text-textcta cursor-pointer transition-all"
-            >
-              Profile
-            </Link>
-          </p>
+          {!context?.dbUser?.username && (
+            <p className="my-2">
+              <Link
+                onClick={() => setOpen(false)}
+                href="/edit-profile"
+                className="hover:text-textcta cursor-pointer transition-all"
+              >
+                Profile
+              </Link>
+            </p>
+          )}
         </div>
       </div>
     </div>

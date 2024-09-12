@@ -1,9 +1,8 @@
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-wrap lg:items-center bg-index3 bg-cover bg-no-repeat py-10 lg:py-0 gap-y-10 lg:gap-y-0">
+    <div className="min-h-screen flex flex-wrap lg:items-center bg-index3 bg-cover py-10 lg:py-0 gap-y-10 lg:gap-y-0">
       <div className="w-full lg:flex-1 flex justify-center items-center">
         <img
-          // src="https://res.cloudinary.com/do8rpl9l4/image/upload/v1725986240/plant_d1wkt7.png"
           src="https://res.cloudinary.com/do8rpl9l4/image/upload/v1726066114/plant_txhxwu.png"
           alt="Logo"
           className="animate__animated animate__fadeInUp h-[80%] w-[80%]"
@@ -17,13 +16,14 @@ export default function Home() {
           </p>
 
           <p className="mt-5 text-justify">
-            Plant-for-the-Planet is a global movement empowering young people
-            and organizations to restore forest ecosystems and fight for climate
-            justice. To do so, we educate young people, restore ecosystems,
-            conduct restoration research, provide free software tools and
-            restoration advice for organizations around the world. We believe
-            that we need to protect the world’s three trillion trees and bring
-            back a further one trillion trees.
+            Planting trees is one of the simplest yet most impactful actions we
+            can take to combat climate change and restore our planet. As Plant
+            for the Planet&apos;s motto says, &quot;Stop Talking, Start
+            Planting&quot;—it’s a call to action for everyone to move beyond
+            words and take real steps towards a greener future. Each tree you
+            plant helps absorb carbon, provides habitat for wildlife, and
+            improves the air we breathe. Let’s stop waiting for change and start
+            creating it, one tree at a time!
           </p>
         </div>
       </div>

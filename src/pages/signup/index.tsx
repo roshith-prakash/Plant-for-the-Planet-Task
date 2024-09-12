@@ -1,10 +1,12 @@
+'use client';
+
 import ErrorStatement from '@/components/ErrorStatement';
 import PasswordInput from '@/components/PasswordInput';
 import Input from '@/components/Input';
 import CTAButton from '@/components/CTAButton';
 import TextArea from '@/components/TextArea';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SignupError } from '@/types/types';
 import {
   Select,
@@ -16,9 +18,15 @@ import {
 import { isValidEmail } from '@/utils/validation';
 import toast from 'react-hot-toast';
 import { GiPineTree } from 'react-icons/gi';
+import axios from 'axios';
+import { useDBUser } from '@/context/userContext';
+import Link from 'next/link';
 
 const Signup = () => {
+  // To route programmatically
   const router = useRouter();
+  // Context to store user data from DB (on sign in)
+  const context = useDBUser();
   // State to store the name
   const [name, setName] = useState<string | undefined>(undefined);
   // State to store the email
@@ -107,13 +115,49 @@ const Signup = () => {
 
     console.log(description);
     setDisabled(true);
-    setDisabled(false);
 
-    // Go to edit-profile page
-    // router.push('edit-profile');
-
-    toast.success('Profile updated!');
+    axios
+      .post('/api/signup', {
+        user: {
+          id: 'UserSignup',
+          name,
+          password,
+          gender,
+          dateOfBirth,
+          description,
+          email,
+          username,
+        },
+      })
+      .then((res) => {
+        // Set user in context
+        context?.setDbUser(res.data.user);
+        // Enable button
+        setDisabled(false);
+        // Toast notification
+        toast.success('Signed up Successfully!');
+        // Go to edit-profile page
+        router.push('edit-profile');
+      })
+      .catch((err) => {
+        setDisabled(false);
+        console.log(err);
+        console.log(err.response.data);
+        console.log(err.status);
+        if (err.status == 409) {
+          toast.error(err.response.data.message);
+        }
+      });
   };
+
+  console.log(context?.dbUser);
+
+  // Taking user to profile page if already signed in
+  useEffect(() => {
+    if (context?.dbUser?.username && context?.dbUser?.username?.length > 0) {
+      router.replace('/edit-profile');
+    }
+  }, []);
 
   return (
     <div className="lg:min-h-screen relative flex items-center w-full bg-hovercta bg-opacity-10">
@@ -122,9 +166,9 @@ const Signup = () => {
         {/* Sign Up Form Div */}
         <div className="bg-white min-w-[23rem] w-[80%] border-[1px] -translate-y-5 md:-translate-y-0 px-8 md:w-[65%] mt-5 md:mt-14 lg:mt-5 p-5 md:px-16 shadow-xl rounded-xl pb-10">
           {/* Title */}
-          <h1 className="flex justify-center items-center gap-x-2 bg-gradient-to-r from-cta to-hovercta bg-clip-text text-transparent font-bold text-2xl mt-5 text-center">
-            <GiPineTree className="text-hovercta" /> Sign Up{' '}
-            <GiPineTree className="text-hovercta" />
+          <h1 className="flex justify-center items-center gap-x-2 text-textcta font-bold text-2xl mt-5 text-center">
+            <GiPineTree className="text-textcta" /> Sign Up
+            <GiPineTree className="text-textcta" />
           </h1>
 
           {/* Name Input field */}
@@ -248,6 +292,13 @@ const Signup = () => {
               text={'Sign up'}
             />
           </div>
+
+          <p className="mt-5 text-center">
+            Already have an account?{' '}
+            <Link href="/login" className="text-textcta hover:underline">
+              Log in
+            </Link>
+          </p>
         </div>
       </div>
 

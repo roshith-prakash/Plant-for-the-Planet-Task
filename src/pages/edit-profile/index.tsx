@@ -2,8 +2,7 @@ import ErrorStatement from '@/components/ErrorStatement';
 import Input from '@/components/Input';
 import CTAButton from '@/components/CTAButton';
 import TextArea from '@/components/TextArea';
-import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SignupError } from '@/types/types';
 import {
   Select,
@@ -15,9 +14,12 @@ import {
 import { isValidEmail } from '@/utils/validation';
 import toast from 'react-hot-toast';
 import { GiPineTree } from 'react-icons/gi';
+import { useDBUser } from '@/context/userContext';
+import axios from 'axios';
 
 const EditProfile = () => {
-  const router = useRouter();
+  // Context to store user data from DB (on sign in)
+  const context = useDBUser();
   // State to store the name
   const [name, setName] = useState<string | undefined>(undefined);
   // State to store the email
@@ -95,15 +97,48 @@ const EditProfile = () => {
       return;
     }
 
-    console.log(description);
     setDisabled(true);
-    setDisabled(false);
 
-    // Go to edit-profile page
-    // router.push('edit-profile');
-
-    toast.success('Profile updated!');
+    axios
+      .post('/api/editProfile', {
+        user: {
+          name,
+          gender,
+          dateOfBirth,
+          description,
+          email,
+          username,
+        },
+      })
+      .then((res) => {
+        // Set user in context
+        context?.setDbUser(res.data.user);
+        // Enable button
+        setDisabled(false);
+        // Toast notification
+        toast.success('Profile updated Successfully!');
+      })
+      .catch((err) => {
+        setDisabled(false);
+        console.log(err);
+        console.log(err.response.data);
+        console.log(err.status);
+        if (err.status == 409) {
+          toast.error(err.response.data.message);
+        }
+      });
   };
+
+  useEffect(() => {
+    setDateOfBirth(context?.dbUser?.dateOfBirth);
+    setGender(context?.dbUser?.gender);
+    setEmail(context?.dbUser?.email);
+    setName(context?.dbUser?.name);
+    setDescription(context?.dbUser?.description || undefined);
+    setUsername(context?.dbUser?.username);
+  }, [context?.dbUser]);
+
+  console.log(context?.dbUser);
 
   return (
     <div className="lg:min-h-screen relative flex items-center w-full bg-hovercta bg-opacity-10">
@@ -112,11 +147,12 @@ const EditProfile = () => {
         {/* Profile Edit Div */}
         <div className="bg-white min-w-[23rem] w-[80%] border-[1px] -translate-y-5 md:-translate-y-0 px-8 md:w-[65%] mt-5 md:mt-14 lg:mt-5 p-5 md:px-16 shadow-xl rounded-xl pb-10">
           {/* Title */}
-          <h1 className="flex justify-center items-center gap-x-2 bg-gradient-to-r from-cta to-hovercta bg-clip-text text-transparent font-bold text-2xl mt-5 text-center">
-            <GiPineTree className="text-hovercta" /> Edit Your Profile
-            <GiPineTree className="text-hovercta" />
+          <h1 className="flex justify-center items-center gap-x-2 text-textcta font-bold text-2xl mt-5 text-center">
+            <GiPineTree className="text-textcta" /> Edit Your Profile
+            <GiPineTree className="text-textcta" />
           </h1>
 
+          {/* Name and Email */}
           <div className="flex flex-wrap gap-x-5 mt-8">
             {/* Name Input field */}
             <div className="w-full lg:flex-1 mt-8 px-2">
@@ -151,6 +187,7 @@ const EditProfile = () => {
             </div>
           </div>
 
+          {/* Username and Gender */}
           <div className="flex flex-wrap gap-x-5">
             {/* Username Input field */}
             <div className="w-full lg:flex-1 mt-8 px-2">
@@ -172,6 +209,7 @@ const EditProfile = () => {
             <div className="w-full lg:flex-1 mt-8 px-2">
               <p className="font-medium">Gender</p>
               <Select
+                value={gender}
                 onValueChange={(selectedGender) => setGender(selectedGender)}
               >
                 <SelectTrigger className="w-full border-none mt-3">

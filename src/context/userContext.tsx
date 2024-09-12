@@ -1,0 +1,71 @@
+import {
+  useContext,
+  useState,
+  createContext,
+  Dispatch,
+  SetStateAction,
+} from 'react';
+
+type UserData = {
+  name: string;
+  dateOfBirth: string;
+  username: string;
+  gender: string;
+  email: string;
+  description: string | null;
+};
+
+// Creating Context
+const UserContext = createContext<{
+  dbUser: UserData;
+  setDbUser: Dispatch<SetStateAction<UserData>>;
+}>({
+  dbUser: {
+    email: '',
+    username: '',
+    name: '',
+    gender: '',
+    description: null,
+    dateOfBirth: '',
+  },
+  setDbUser: () => {
+    return {
+      email: '',
+      username: '',
+      name: '',
+      gender: '',
+      description: null,
+      dateOfBirth: '',
+    };
+  },
+});
+
+// Hook to consume the context
+export function useDBUser() {
+  if (UserContext) {
+    return useContext(UserContext);
+  }
+}
+
+// UserProvider Component that provides the dbUser context to all its children
+export function UserProvider({ children }: { children: React.ReactNode }) {
+  const [dbUser, setDbUser] = useState<UserData>({
+    email: '',
+    username: '',
+    name: '',
+    gender: '',
+    description: null,
+    dateOfBirth: '',
+  });
+
+  // Value object to be passed in context
+  const value = {
+    dbUser,
+    setDbUser,
+  };
+
+  return (
+    // Context Provider
+    <UserContext.Provider value={value}>{children}</UserContext.Provider>
+  );
+}
