@@ -39,15 +39,6 @@ export default async function handler(
     });
 
     if (userInDB) {
-      res.setHeader(
-        'Set-Cookie',
-        cookie.serialize('username', userInDB?.username as string, {
-          httpOnly: true,
-          maxAge: 60 * 60 * 24,
-          secure: true,
-        })
-      );
-
       res.status(200).send({ user: userInDB });
       return;
     } else {
