@@ -1,5 +1,4 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import cookie from 'cookie';
 import { prisma } from '@/utils/prismaClient';
 
 type Data = {
