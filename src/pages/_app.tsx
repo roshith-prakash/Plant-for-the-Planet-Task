@@ -4,7 +4,10 @@ import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { Toaster } from 'react-hot-toast';
 import { UserProvider } from '@/context/userContext';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import 'animate.css';
+
+const queryClient = new QueryClient();
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -14,10 +17,12 @@ export default function App({ Component, pageProps }: AppProps) {
         <link rel="icon" href="plant.png" />
       </Head>
       <Toaster />
-      <Navbar />
-      <UserProvider>
-        <Component {...pageProps} />
-      </UserProvider>
+      <QueryClientProvider client={queryClient}>
+        <UserProvider>
+          <Navbar />
+          <Component {...pageProps} />
+        </UserProvider>
+      </QueryClientProvider>
     </>
   );
 }

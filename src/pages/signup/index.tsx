@@ -155,12 +155,21 @@ const Signup = () => {
   // Taking user to profile page if already signed in
   useEffect(() => {
     if (context?.dbUser?.username && context?.dbUser?.username?.length > 0) {
-      router.replace('/edit-profile');
+      axios
+        .get('/api/getUser')
+        .then((res) => {
+          console.log(res);
+          toast('You have already signed up!');
+          router.replace('/edit-profile');
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
-  }, []);
+  }, [context?.dbUser?.username]);
 
   return (
-    <div className="lg:min-h-screen relative flex items-center w-full bg-hovercta bg-opacity-10">
+    <div className="min-h-screen h-full relative flex items-center w-full bg-hovercta bg-opacity-10">
       {/* Left Div */}
       <div className="mt-5 animate__animated animate__fadeInUp no-scrollbar overflow-hidden lg:mt-0 lg:h-full lg:min-h-[88vh] pb-10 flex-1 flex justify-center items-center">
         {/* Sign Up Form Div */}

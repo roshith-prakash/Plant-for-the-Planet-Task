@@ -1,9 +1,12 @@
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 import {
   useContext,
   useState,
   createContext,
   Dispatch,
   SetStateAction,
+  useEffect,
 } from 'react';
 
 type UserData = {
@@ -57,6 +60,20 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     description: null,
     dateOfBirth: '',
   });
+
+  const { data } = useQuery({
+    queryKey: ['dbUser'],
+    queryFn: async () => {
+      return axios.get('/api/getUser');
+    },
+  });
+
+  useEffect(() => {
+    if (data?.data?.user) {
+      console.log(data?.data?.user);
+      setDbUser(data?.data?.user);
+    }
+  }, [data]);
 
   // Value object to be passed in context
   const value = {

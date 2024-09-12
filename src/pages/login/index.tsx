@@ -80,12 +80,21 @@ const Login = () => {
 
   console.log(context?.dbUser);
 
-  // Taking user to profile page if already signed in
+  // Taking user to profile page if already logged in
   useEffect(() => {
     if (context?.dbUser?.username && context?.dbUser?.username?.length > 0) {
-      router.replace('/edit-profile');
+      axios
+        .get('/api/getUser')
+        .then((res) => {
+          console.log(res);
+          toast('You have already logged in!');
+          router.replace('/edit-profile');
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
-  }, []);
+  }, [context?.dbUser?.username]);
 
   return (
     <div className="min-h-screen flex items-center w-full bg-hovercta bg-opacity-10">

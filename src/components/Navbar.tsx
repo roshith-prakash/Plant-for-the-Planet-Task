@@ -8,6 +8,8 @@ const Navbar = () => {
   const [open, setOpen] = useState<boolean>(false);
   const context = useDBUser();
 
+  console.log(context?.dbUser?.username);
+
   return (
     <div
       className={`relative top-0 w-full font-inter shadow-md overflow-hidden bg-white flex justify-between items-center px-5 lg:px-10 py-5 z-10 max-w-screen`}
@@ -32,7 +34,8 @@ const Navbar = () => {
         {/* Search Icon - takes to search page. */}
 
         {/* Link to signup page */}
-        {!context?.dbUser?.username && (
+        {(!context?.dbUser?.username ||
+          context?.dbUser?.username?.length == 0) && (
           <Link
             href="/signup"
             className="hidden lg:block hover:text-textcta cursor-pointer transition-all"
@@ -42,7 +45,8 @@ const Navbar = () => {
         )}
 
         {/* Link to login page */}
-        {!context?.dbUser?.username && (
+        {(!context?.dbUser?.username ||
+          context?.dbUser?.username?.length == 0) && (
           <Link
             href="/login"
             className="hidden lg:block hover:text-textcta cursor-pointer transition-all"
@@ -52,12 +56,25 @@ const Navbar = () => {
         )}
 
         {/* Link to profile page */}
-        {!context?.dbUser?.username && (
+        {context?.dbUser?.username && context?.dbUser?.username?.length > 0 && (
+          <div className="hidden lg:flex items-center gap-x-1">
+            Hey,
+            <Link
+              href="/edit-profile"
+              className=" hover:text-textcta cursor-pointer transition-all"
+            >
+              {context?.dbUser?.name}
+            </Link>
+          </div>
+        )}
+
+        {/* Link to log out page */}
+        {context?.dbUser?.username && context?.dbUser?.username?.length > 0 && (
           <Link
-            href="/edit-profile"
+            href="/logout"
             className="hidden lg:block hover:text-textcta cursor-pointer transition-all"
           >
-            Profile
+            Log Out
           </Link>
         )}
 
@@ -110,7 +127,8 @@ const Navbar = () => {
           </p>
 
           {/* Link to signup page */}
-          {!context?.dbUser?.username && (
+          {(!context?.dbUser?.username ||
+            context?.dbUser?.username?.length == 0) && (
             <p className="my-2">
               <Link
                 onClick={() => setOpen(false)}
@@ -123,7 +141,8 @@ const Navbar = () => {
           )}
 
           {/* Link to login page */}
-          {!context?.dbUser?.username && (
+          {(!context?.dbUser?.username ||
+            context?.dbUser?.username?.length == 0) && (
             <p className="my-2">
               <Link
                 onClick={() => setOpen(false)}
@@ -136,17 +155,33 @@ const Navbar = () => {
           )}
 
           {/* Link to edit-profile page */}
-          {!context?.dbUser?.username && (
-            <p className="my-2">
-              <Link
-                onClick={() => setOpen(false)}
-                href="/edit-profile"
-                className="hover:text-textcta cursor-pointer transition-all"
-              >
-                Profile
-              </Link>
-            </p>
-          )}
+          {context?.dbUser?.username &&
+            context?.dbUser?.username?.length > 0 && (
+              <p className="my-2 flex justify-center items-center gap-x-1">
+                Hey,
+                <Link
+                  onClick={() => setOpen(false)}
+                  href="/edit-profile"
+                  className="hover:text-textcta cursor-pointer transition-all"
+                >
+                  {context?.dbUser?.name}
+                </Link>
+              </p>
+            )}
+
+          {/* Link to log out page */}
+          {context?.dbUser?.username &&
+            context?.dbUser?.username?.length > 0 && (
+              <p className="my-2">
+                <Link
+                  onClick={() => setOpen(false)}
+                  href="/logout"
+                  className="hover:text-textcta cursor-pointer transition-all"
+                >
+                  Log Out
+                </Link>
+              </p>
+            )}
         </div>
       </div>
     </div>
