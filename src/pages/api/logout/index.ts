@@ -21,7 +21,6 @@ export default async function handler(
   res: NextApiResponse<Data | Message>
 ) {
   const cookies: { username?: string } = req.cookies;
-  console.log(cookies);
 
   //  If cookie is not present
   if (!cookies?.username) {
@@ -31,8 +30,7 @@ export default async function handler(
   }
 
   try {
-    //Find if user with email exists in DB
-
+    //Delete the cookie by having a small maxAge
     res.setHeader(
       'Set-Cookie',
       cookie.serialize('username', '', {

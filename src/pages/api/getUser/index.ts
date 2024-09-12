@@ -22,7 +22,6 @@ export default async function handler(
   res: NextApiResponse<Data | Message>
 ) {
   const cookies: { username?: string } = req.cookies;
-  console.log(cookies);
 
   //  If cookie is not present
   if (!cookies?.username) {

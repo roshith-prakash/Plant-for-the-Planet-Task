@@ -21,14 +21,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data | Message>
 ) {
-  const cookies: { username?: string } = req.cookies;
-  console.log(cookies);
-
-  //   if (cookies?.username) {
-  //     res.status(409).send({ message: 'User already signed in.' });
-  //     return;
-  //   }
-
   try {
     // Get user from request.
     const user = req.body?.user;
