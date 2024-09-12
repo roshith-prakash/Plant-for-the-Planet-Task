@@ -35,7 +35,7 @@ export default async function handler(
       'Set-Cookie',
       cookie.serialize('username', '', {
         httpOnly: true,
-        maxAge: 0.5,
+        expires: new Date(1970 - 1 - 1),
         secure: true,
       })
     );
