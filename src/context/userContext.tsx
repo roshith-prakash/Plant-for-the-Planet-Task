@@ -70,7 +70,6 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     if (data?.data?.user) {
-      console.log(data?.data?.user);
       setDbUser(data?.data?.user);
     }
   }, [data]);

@@ -142,7 +142,6 @@ const EditProfile = () => {
         .get('/api/getUser')
         .then((res) => {
           console.log(res);
-          context?.setDbUser(res.data.user);
           setLoading(false);
         })
         .catch((err) => {
@@ -151,7 +150,7 @@ const EditProfile = () => {
           router.replace('/login');
           setTimeout(() => {
             setLoading(false);
-          }, 1500);
+          }, 2500);
         });
     } else {
       setLoading(false);

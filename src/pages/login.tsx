@@ -75,9 +75,8 @@ const Login = () => {
         console.log(err);
         console.log(err.response.data);
         console.log(err.status);
-        if (err.status == 409) {
-          toast.error(err.response.data.message);
-        }
+
+        toast.error(err.response.data.message);
       });
   };
 
@@ -85,7 +84,7 @@ const Login = () => {
 
   // Taking user to profile page if already logged in
   useEffect(() => {
-    if (context?.dbUser?.username && context?.dbUser?.username?.length > 0) {
+    if (context?.dbUser?.username || context?.dbUser?.username?.length == 0) {
       setLoading(true);
       axios
         .get('/api/getUser')
@@ -95,14 +94,17 @@ const Login = () => {
           router.replace('/edit-profile');
           setTimeout(() => {
             setLoading(false);
-          }, 1500);
+          }, 2000);
         })
         .catch((err) => {
           console.log(err);
           setLoading(false);
         });
     } else {
-      setLoading(false);
+      router.replace('/edit-profile');
+      setTimeout(() => {
+        setLoading(false);
+      }, 2000);
     }
   }, [context?.dbUser?.username]);
 

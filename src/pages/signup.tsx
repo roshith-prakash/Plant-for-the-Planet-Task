@@ -153,12 +153,13 @@ const Signup = () => {
       });
   };
 
-  console.log(context?.dbUser);
-
   // Taking user to profile page if already signed in
   useEffect(() => {
-    if (context?.dbUser?.username && context?.dbUser?.username?.length > 0) {
+    // If context does not have user (check if user has to be retrieved using cookie)
+    if (!context?.dbUser?.username || context?.dbUser?.username?.length == 0) {
       setLoading(true);
+
+      // If user is returned, then cookie already exists and thus user is logged in
       axios
         .get('/api/getUser')
         .then((res) => {
@@ -167,14 +168,20 @@ const Signup = () => {
           router.replace('/edit-profile');
           setTimeout(() => {
             setLoading(false);
-          }, 1500);
+          }, 2000);
         })
+        // If no user is returned (404) then signup page can be shown
         .catch((err) => {
           setLoading(false);
           console.log(err);
         });
-    } else {
-      setLoading(false);
+    }
+    // If user is already in context, forward them to profile page
+    else {
+      router.replace('/edit-profile');
+      setTimeout(() => {
+        setLoading(false);
+      }, 2000);
     }
   }, [context?.dbUser?.username]);
 

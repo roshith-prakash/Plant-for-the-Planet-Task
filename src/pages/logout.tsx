@@ -17,8 +17,11 @@ const Login = () => {
 
   // Taking user to login page if user has not signed in
   useEffect(() => {
+    // If user is not present then check for user data in cookie
     if (!context?.dbUser?.username || context?.dbUser?.username?.length == 0) {
       setLoading(true);
+
+      // If error is received (404), user is not logged in and thus redirect to login page
       axios
         .get('/api/getUser')
         .then((res) => {
@@ -27,13 +30,15 @@ const Login = () => {
         })
         .catch((err) => {
           console.log(err);
+          router.push('/login');
           toast('You have not logged in!');
-          router.replace('/login');
           setTimeout(() => {
             setLoading(false);
-          }, 1500);
+          }, 2500);
         });
-    } else {
+    }
+    // If user is already in context, show logout screen
+    else {
       setLoading(false);
     }
   }, [context?.dbUser?.username]);

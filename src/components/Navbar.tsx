@@ -72,7 +72,7 @@ const Navbar = () => {
         {context?.dbUser?.username && context?.dbUser?.username?.length > 0 && (
           <Link
             href="/logout"
-            className="hidden lg:block hover:text-textcta cursor-pointer transition-all"
+            className="hidden lg:block text-white bg-gradient-to-r from-cta to-hovercta rounded-xl px-5 py-2 cursor-pointer hover:scale-105 transition-all"
           >
             Log Out
           </Link>
@@ -172,15 +172,15 @@ const Navbar = () => {
           {/* Link to log out page */}
           {context?.dbUser?.username &&
             context?.dbUser?.username?.length > 0 && (
-              <p className="my-2">
+              <div className="flex justify-center">
                 <Link
                   onClick={() => setOpen(false)}
                   href="/logout"
-                  className="hover:text-textcta cursor-pointer transition-all"
+                  className="my-3 w-fit text-white bg-gradient-to-r from-cta to-hovercta rounded-xl px-5 py-2 cursor-pointer hover:scale-105 transition-all"
                 >
                   Log Out
                 </Link>
-              </p>
+              </div>
             )}
         </div>
       </div>
