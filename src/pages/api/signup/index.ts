@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import cookie from 'cookie';
 import { prisma } from '@/utils/prismaClient';
+import bcrypt from 'bcrypt';
 
 type Data = {
   user: {
@@ -40,13 +41,15 @@ export default async function handler(
     });
 
     if (!checkEmail && !checkUsername) {
+      const hashedPassword = await bcrypt.hash(user?.password, 5);
+
       // Create a user in DB
       const createdUser = await prisma.user.create({
         data: {
           username: user?.username,
           description: user?.description,
           dateOfBirth: user?.dateOfBirth,
-          password: user?.password,
+          password: hashedPassword,
           email: user?.email,
           name: user?.name,
           gender: user?.gender,
