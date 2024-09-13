@@ -2,7 +2,9 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import cookie from 'cookie';
 import { prisma } from '@/utils/prismaClient';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
+// User data returned from API.
 type Data = {
   user: {
     name: string;
@@ -14,6 +16,7 @@ type Data = {
   };
 };
 
+// Error message sent from API.
 type Message = {
   message: string;
 };
@@ -40,7 +43,9 @@ export default async function handler(
       },
     });
 
+    // If neither username or email is already present, create the user
     if (!checkEmail && !checkUsername) {
+      // Hash the password sent by the user
       const hashedPassword = await bcrypt.hash(user?.password, 5);
 
       // Create a user in DB
@@ -65,10 +70,21 @@ export default async function handler(
         },
       });
 
-      // Set the username in cookie
+      // Sign the JWT with user ID
+      const jwtData = jwt.sign(
+        {
+          id: createdUser?.id,
+        },
+        process.env.JWT_SECRET as string,
+        {
+          expiresIn: '1d',
+        }
+      );
+
+      // Set the user in cookie
       res.setHeader(
         'Set-Cookie',
-        cookie.serialize('user', createdUser?.id as string, {
+        cookie.serialize('user', jwtData, {
           path: '/',
           httpOnly: true,
           maxAge: 60 * 60 * 24,
@@ -78,15 +94,21 @@ export default async function handler(
       // Send the createdUser
       res.status(201).send({ user: createdUser });
       return;
-    } else if (!checkUsername && checkEmail) {
+    }
+    // If Email is already present
+    else if (!checkUsername && checkEmail) {
       // Send error message
       res.status(409).send({ message: 'Email already present in database.' });
       return;
-    } else if (checkUsername && !checkEmail) {
+    }
+    // If username is already present
+    else if (checkUsername && !checkEmail) {
       // Send error message
       res.status(409).send({ message: 'Username already in use.' });
       return;
-    } else {
+    }
+    // If both email and username is already present
+    else {
       // Send error message
       res.status(409).send({ message: 'Email and username already in use.' });
       return;
@@ -94,5 +116,6 @@ export default async function handler(
   } catch (err) {
     console.log(err);
     res.status(500).send({ message: 'Something went wrong!' });
+    return;
   }
 }

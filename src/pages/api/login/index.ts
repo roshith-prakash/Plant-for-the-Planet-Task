@@ -2,7 +2,9 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import cookie from 'cookie';
 import { prisma } from '@/utils/prismaClient';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
+// User data returned from API.
 type Data = {
   user: {
     name: string;
@@ -14,6 +16,7 @@ type Data = {
   };
 };
 
+// Error message sent from API.
 type Message = {
   message: string;
 };
@@ -59,9 +62,21 @@ export default async function handler(
 
         // If user is found, set the username in cookie
         if (userInDB) {
+          // Sign JWT with user ID
+          const jwtData = jwt.sign(
+            {
+              id: userInDB?.id,
+            },
+            process.env.JWT_SECRET as string,
+            {
+              expiresIn: '1d',
+            }
+          );
+
+          // Set the user in cookie
           res.setHeader(
             'Set-Cookie',
-            cookie.serialize('user', userInDB?.id as string, {
+            cookie.serialize('user', jwtData, {
               path: '/',
               httpOnly: true,
               maxAge: 60 * 60 * 24,
@@ -85,6 +100,7 @@ export default async function handler(
   } catch (err) {
     console.log(err);
     res.status(500).send({ message: 'Something went wrong!' });
+    return;
   }
 }
 

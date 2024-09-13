@@ -1,6 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { prisma } from '@/utils/prismaClient';
+import jwt, { JwtPayload } from 'jsonwebtoken';
 
+// User data returned from API.
 type Data = {
   user: {
     name: string;
@@ -12,6 +14,7 @@ type Data = {
   };
 };
 
+// Error message sent from API.
 type Message = {
   message: string;
 };
@@ -38,9 +41,16 @@ export default async function handler(
       },
     });
 
+    // Get data from cookie JWT
+    const CookieUser = jwt.verify(
+      cookies?.user,
+      process.env.JWT_SECRET as string
+    ) as JwtPayload;
+
+    // Get user with id stored in cookie
     const getCurrentUser = await prisma.user.findUnique({
       where: {
-        id: cookies?.user,
+        id: CookieUser?.id,
       },
     });
 
@@ -51,10 +61,10 @@ export default async function handler(
       return;
     }
 
-    // Create a user in DB
+    // Update the user in DB
     const createdUser = await prisma.user.update({
       where: {
-        id: cookies?.user,
+        id: CookieUser?.id,
       },
       data: {
         username: user?.username,
@@ -78,7 +88,9 @@ export default async function handler(
     res.status(201).send({ user: createdUser });
     return;
   } catch (err) {
+    // Return error
     console.log(err);
     res.status(500).send({ message: 'Something went wrong!' });
+    return;
   }
 }

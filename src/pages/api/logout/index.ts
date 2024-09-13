@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import cookie from 'cookie';
 
+// Error message sent from API.
 type Message = {
   message: string;
 };
@@ -29,10 +30,13 @@ export default async function handler(
       })
     );
 
+    // Return logged out message
     res.status(200).send({ message: 'Logged out.' });
     return;
   } catch (err) {
+    // Return error
     console.log(err);
     res.status(500).send({ message: 'Something went wrong!' });
+    return;
   }
 }
