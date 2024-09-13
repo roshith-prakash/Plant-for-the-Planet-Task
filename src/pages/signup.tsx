@@ -164,7 +164,6 @@ const Signup = () => {
         .get('/api/getUser')
         .then((res) => {
           console.log(res);
-          toast('You have already signed up!');
           router.replace('/edit-profile');
           setTimeout(() => {
             setLoading(false);
@@ -336,7 +335,10 @@ const Signup = () => {
 
               <p className="mt-5 text-center">
                 Already have an account?{' '}
-                <Link href="/login" className="text-textcta hover:underline">
+                <Link
+                  href="/login"
+                  className="text-textcta text-nowrap hover:underline"
+                >
                   Log in
                 </Link>
               </p>

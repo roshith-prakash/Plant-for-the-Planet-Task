@@ -65,6 +65,7 @@ export default async function handler(
       res.setHeader(
         'Set-Cookie',
         cookie.serialize('username', createdUser?.username as string, {
+          path: '/',
           httpOnly: true,
           maxAge: 60 * 60 * 24,
           secure: true,

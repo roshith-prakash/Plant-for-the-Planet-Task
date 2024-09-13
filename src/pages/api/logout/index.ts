@@ -23,6 +23,7 @@ export default async function handler(
     res.setHeader(
       'Set-Cookie',
       cookie.serialize('username', '', {
+        path: '/',
         httpOnly: true,
         expires: new Date('1970-1-1'),
         secure: true,

@@ -90,7 +90,6 @@ const Login = () => {
         .get('/api/getUser')
         .then((res) => {
           console.log(res);
-          toast('You have already logged in!');
           router.replace('/edit-profile');
           setTimeout(() => {
             setLoading(false);
@@ -190,7 +189,10 @@ const Login = () => {
 
               <p className="mt-5 text-center">
                 Don&apos;t have an account?{' '}
-                <Link href="/signup" className="text-textcta hover:underline">
+                <Link
+                  href="/signup"
+                  className="text-textcta text-nowrap hover:underline"
+                >
                   Sign up
                 </Link>
               </p>

@@ -146,7 +146,6 @@ const EditProfile = () => {
         })
         .catch((err) => {
           console.log(err);
-          toast('You have not logged in!');
           router.replace('/login');
           setTimeout(() => {
             setLoading(false);

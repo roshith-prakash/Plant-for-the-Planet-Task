@@ -31,7 +31,6 @@ const Login = () => {
         .catch((err) => {
           console.log(err);
           router.push('/login');
-          toast('You have not logged in!');
           setTimeout(() => {
             setLoading(false);
           }, 2500);
