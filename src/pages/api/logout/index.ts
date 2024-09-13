@@ -26,7 +26,6 @@ export default async function handler(
         path: '/',
         httpOnly: true,
         expires: new Date('1970-1-1'),
-        secure: true,
       })
     );
 

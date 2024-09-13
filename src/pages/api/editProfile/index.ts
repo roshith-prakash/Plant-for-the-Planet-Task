@@ -62,7 +62,6 @@ export default async function handler(
         path: '/',
         httpOnly: true,
         maxAge: 60 * 60 * 24,
-        secure: true,
       })
     );
 
