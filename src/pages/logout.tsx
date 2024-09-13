@@ -43,29 +43,31 @@ const Login = () => {
     }
   }, [context?.dbUser?.username]);
 
-  const logout = () => {
+  const logout = async () => {
     setDisabled(true);
 
-    axios
-      .get('/api/logout')
-      .then((res) => {
-        console.log(res);
-        setDisabled(false);
-        context?.setDbUser({
-          email: '',
-          username: '',
-          name: '',
-          gender: '',
-          description: null,
-          dateOfBirth: '',
-        });
-        router.replace('/login');
-      })
-      .catch((err) => {
-        console.log(err);
-        setDisabled(false);
-        toast.error('Something went wrong.');
+    try {
+      const res = await axios.get('/api/logout');
+      console.log(res);
+
+      // Set user context to an empty state
+      context?.setDbUser({
+        email: '',
+        username: '',
+        name: '',
+        gender: '',
+        description: null,
+        dateOfBirth: '',
       });
+
+      // Ensure the state is set before navigating
+      setDisabled(false);
+      router.replace('/login');
+    } catch (err) {
+      console.log(err);
+      setDisabled(false);
+      toast.error('Something went wrong.');
+    }
   };
 
   return (

@@ -76,7 +76,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     if (data?.data?.user) {
       setDbUser(data?.data?.user);
     }
-  }, [data]);
+  }, [data?.data]);
 
   // Value object to be passed in context
   const value = {
