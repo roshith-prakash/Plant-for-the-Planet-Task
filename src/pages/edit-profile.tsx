@@ -115,9 +115,8 @@ const EditProfile = () => {
           username,
         },
       })
-      .then((res) => {
-        // Set user in context
-        context?.setDbUser(res.data.user);
+      .then(() => {
+        context?.refetch();
         // Enable button
         setDisabled(false);
         // Toast notification

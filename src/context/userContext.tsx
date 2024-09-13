@@ -23,6 +23,7 @@ type UserData = {
 const UserContext = createContext<{
   dbUser: UserData;
   setDbUser: Dispatch<SetStateAction<UserData>>;
+  refetch: () => void;
 }>({
   dbUser: {
     email: '',
@@ -42,6 +43,7 @@ const UserContext = createContext<{
       dateOfBirth: '',
     };
   },
+  refetch: () => {},
 });
 
 // Hook to consume the context
@@ -64,7 +66,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   });
 
   // UseQuery to query the user object on page load
-  const { data } = useQuery({
+  const { data, refetch } = useQuery({
     queryKey: ['dbUser'],
     queryFn: async () => {
       return axios.get('/api/getUser');
@@ -83,6 +85,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   const value = {
     dbUser,
     setDbUser,
+    refetch,
   };
 
   return (
