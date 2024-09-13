@@ -8,8 +8,6 @@ const Navbar = () => {
   const [open, setOpen] = useState<boolean>(false);
   const context = useDBUser();
 
-  console.log(context?.dbUser?.username);
-
   return (
     <div
       className={`relative top-0 w-full font-inter shadow-md overflow-hidden bg-white flex justify-between items-center px-5 lg:px-10 py-5 z-10 max-w-screen`}

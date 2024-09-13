@@ -41,6 +41,7 @@ export default async function handler(
       },
     });
 
+    // If user is found, set the username in cookie
     if (userInDB) {
       res.setHeader(
         'Set-Cookie',
@@ -51,6 +52,7 @@ export default async function handler(
         })
       );
 
+      // Return the user object
       res.status(200).send({ user: userInDB });
       return;
     } else {

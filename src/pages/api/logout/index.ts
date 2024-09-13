@@ -1,24 +1,13 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import cookie from 'cookie';
 
-type Data = {
-  user: {
-    name: string;
-    dateOfBirth: string;
-    username: string;
-    gender: string;
-    email: string;
-    description: string | null;
-  };
-};
-
 type Message = {
   message: string;
 };
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data | Message>
+  res: NextApiResponse<Message>
 ) {
   const cookies: { username?: string } = req.cookies;
 

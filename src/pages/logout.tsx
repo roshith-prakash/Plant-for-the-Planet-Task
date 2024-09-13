@@ -84,7 +84,7 @@ const Login = () => {
       ) : (
         <div className="min-h-screen relative flex w-full bg-hovercta bg-opacity-10">
           {/* Main Div */}
-          <div className="mt-5 no-scrollbar animate__animated animate__fadeInUp overflow-hidden lg:mt-0 lg:h-full lg:min-h-[88vh] pb-10 flex-1 flex justify-center items-start pt-10">
+          <div className="mt-5  animate__animated animate__fadeInUp overflow-hidden lg:mt-0 lg:h-full lg:min-h-[88vh] pb-10 flex-1 flex justify-center items-start pt-10">
             {/* Profile Edit Div */}
             <div className="bg-white max-w-[95%] border-[1px] md:-translate-y-0 px-8 mt-5 md:mt-14 lg:mt-5 p-5 md:px-16 shadow-xl rounded-xl pb-10">
               {/* Title */}

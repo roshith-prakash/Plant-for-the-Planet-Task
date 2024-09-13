@@ -22,6 +22,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data | Message>
 ) {
+  // Get the cookies from the request
   const cookies: { username?: string } = req.cookies;
 
   //  If cookie is not present
@@ -39,6 +40,7 @@ export default async function handler(
       },
     });
 
+    // If user is present, return user object
     if (userInDB) {
       res.status(200).send({ user: userInDB });
       return;

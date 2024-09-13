@@ -9,6 +9,7 @@ import {
   useEffect,
 } from 'react';
 
+// Type of user object returned from API
 type UserData = {
   name: string;
   dateOfBirth: string;
@@ -52,6 +53,7 @@ export function useDBUser() {
 
 // UserProvider Component that provides the dbUser context to all its children
 export function UserProvider({ children }: { children: React.ReactNode }) {
+  // State to store user object - default values present
   const [dbUser, setDbUser] = useState<UserData>({
     email: '',
     username: '',
@@ -61,6 +63,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     dateOfBirth: '',
   });
 
+  // UseQuery to query the user object on page load
   const { data } = useQuery({
     queryKey: ['dbUser'],
     queryFn: async () => {
@@ -68,6 +71,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     },
   });
 
+  // If user object is returned from API, set it in state
   useEffect(() => {
     if (data?.data?.user) {
       setDbUser(data?.data?.user);

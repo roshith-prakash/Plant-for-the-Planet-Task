@@ -61,6 +61,7 @@ export default async function handler(
         },
       });
 
+      // Set the username in cookie
       res.setHeader(
         'Set-Cookie',
         cookie.serialize('username', createdUser?.username as string, {

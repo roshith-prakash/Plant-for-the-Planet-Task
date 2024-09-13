@@ -201,7 +201,7 @@ const Signup = () => {
       ) : (
         <div className="min-h-screen h-full relative flex items-center w-full bg-hovercta bg-opacity-10">
           {/* Left Div */}
-          <div className="mt-5 animate__animated animate__fadeInUp no-scrollbar overflow-hidden lg:mt-0 lg:h-full lg:min-h-[88vh] pb-10 flex-1 flex justify-center items-center">
+          <div className="mt-5 animate__animated animate__fadeInUp overflow-hidden lg:mt-0 lg:h-full lg:min-h-[88vh] pb-10 flex-1 flex justify-center items-center">
             {/* Sign Up Form Div */}
             <div className="bg-white min-w-[23rem] w-[80%] border-[1px] -translate-y-5 md:-translate-y-0 px-8 md:w-[65%] mt-5 md:mt-14 lg:mt-5 p-5 md:px-16 shadow-xl rounded-xl pb-10">
               {/* Title */}

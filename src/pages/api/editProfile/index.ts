@@ -24,7 +24,7 @@ export default async function handler(
   const cookies: { username?: string } = req.cookies;
 
   if (!cookies?.username) {
-    res.status(409).send({ message: 'User already signed in.' });
+    res.status(404).send({ message: 'User not signed in.' });
     return;
   }
 
@@ -55,6 +55,7 @@ export default async function handler(
       },
     });
 
+    // Set the cookie
     res.setHeader(
       'Set-Cookie',
       cookie.serialize('username', createdUser?.username as string, {
@@ -64,7 +65,7 @@ export default async function handler(
       })
     );
 
-    // Send the createdUser
+    // Send the updated User object
     res.status(201).send({ user: createdUser });
     return;
   } catch (err) {
