@@ -440,7 +440,7 @@ const Signup = () => {
           <div className="hidden animate__animated animate__fadeInUp lg:flex lg:flex-1 justify-center items-start">
             <img
               src="https://res.cloudinary.com/do8rpl9l4/image/upload/v1725973140/signup_dbhrkw.svg"
-              className="max-w-[70%] pointer-events-none"
+              className="max-w-[80%] pointer-events-none"
             />
           </div>
         </div>
