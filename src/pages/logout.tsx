@@ -6,7 +6,7 @@ import CTAButton from '@/components/CTAButton';
 import axios from 'axios';
 import RingLoader from 'react-spinners/RingLoader';
 
-const Login = () => {
+const Logout = () => {
   const router = useRouter();
   // Context to store user data from DB (on sign in)
   const context = useDBUser();
@@ -114,4 +114,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Logout;
