@@ -21,9 +21,9 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data | Message>
 ) {
-  const cookies: { username?: string } = req.cookies;
+  const cookies: { user?: string } = req.cookies;
 
-  if (!cookies?.username) {
+  if (!cookies?.user) {
     res.status(404).send({ message: 'User not signed in.' });
     return;
   }
@@ -32,10 +32,30 @@ export default async function handler(
     // Get user from request.
     const user = req.body?.user;
 
+    //Find if user with email exists in DB
+    const checkUsername = await prisma.user.findUnique({
+      where: {
+        username: user?.username,
+      },
+    });
+
+    const getCurrentUser = await prisma.user.findUnique({
+      where: {
+        id: cookies?.user,
+      },
+    });
+
+    // If username is used by some other user, send conflict error
+    if (checkUsername && checkUsername?.id != getCurrentUser?.id) {
+      // Send error message
+      res.status(409).send({ message: 'Username already in use.' });
+      return;
+    }
+
     // Create a user in DB
     const createdUser = await prisma.user.update({
       where: {
-        username: cookies?.username,
+        id: cookies?.user,
       },
       data: {
         username: user?.username,
@@ -54,16 +74,6 @@ export default async function handler(
         description: true,
       },
     });
-
-    // Set the cookie
-    res.setHeader(
-      'Set-Cookie',
-      cookie.serialize('username', createdUser?.username as string, {
-        path: '/',
-        httpOnly: true,
-        maxAge: 60 * 60 * 24,
-      })
-    );
 
     // Send the updated User object
     res.status(201).send({ user: createdUser });

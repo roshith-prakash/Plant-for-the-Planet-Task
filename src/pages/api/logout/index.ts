@@ -9,10 +9,10 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Message>
 ) {
-  const cookies: { username?: string } = req.cookies;
+  const cookies: { user?: string } = req.cookies;
 
   //  If cookie is not present
-  if (!cookies?.username) {
+  if (!cookies?.user) {
     // Send error message
     res.status(404).send({ message: 'User not present' });
     return;
@@ -22,7 +22,7 @@ export default async function handler(
     //Delete the cookie by having a small maxAge
     res.setHeader(
       'Set-Cookie',
-      cookie.serialize('username', '', {
+      cookie.serialize('user', '', {
         path: '/',
         httpOnly: true,
         expires: new Date('1970-1-1'),

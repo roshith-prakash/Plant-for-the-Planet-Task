@@ -32,6 +32,7 @@ export default async function handler(
         password: user?.password,
       },
       select: {
+        id: true,
         name: true,
         username: true,
         email: true,
@@ -45,7 +46,7 @@ export default async function handler(
     if (userInDB) {
       res.setHeader(
         'Set-Cookie',
-        cookie.serialize('username', userInDB?.username as string, {
+        cookie.serialize('user', userInDB?.id as string, {
           path: '/',
           httpOnly: true,
           maxAge: 60 * 60 * 24,

@@ -23,10 +23,10 @@ export default async function handler(
   res: NextApiResponse<Data | Message>
 ) {
   // Get the cookies from the request
-  const cookies: { username?: string } = req.cookies;
+  const cookies: { user?: string } = req.cookies;
 
   //  If cookie is not present
-  if (!cookies?.username) {
+  if (!cookies?.user) {
     // Send error message
     res.status(404).send({ message: 'User not present' });
     return;
@@ -36,7 +36,7 @@ export default async function handler(
     //Find if user with email exists in DB
     const userInDB = await prisma.user.findUnique({
       where: {
-        username: cookies?.username,
+        id: cookies?.user,
       },
     });
 

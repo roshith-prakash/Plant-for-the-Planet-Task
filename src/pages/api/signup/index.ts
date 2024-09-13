@@ -52,6 +52,7 @@ export default async function handler(
           gender: user?.gender,
         },
         select: {
+          id: true,
           name: true,
           username: true,
           email: true,
@@ -64,7 +65,7 @@ export default async function handler(
       // Set the username in cookie
       res.setHeader(
         'Set-Cookie',
-        cookie.serialize('username', createdUser?.username as string, {
+        cookie.serialize('user', createdUser?.id as string, {
           path: '/',
           httpOnly: true,
           maxAge: 60 * 60 * 24,
