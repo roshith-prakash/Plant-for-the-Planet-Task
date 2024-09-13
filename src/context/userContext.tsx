@@ -69,6 +69,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     queryFn: async () => {
       return axios.get('/api/getUser');
     },
+    staleTime: 1000 * 60,
   });
 
   // If user object is returned from API, set it in state
