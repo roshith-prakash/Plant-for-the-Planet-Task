@@ -11,6 +11,7 @@ import toast from 'react-hot-toast';
 import { useDBUser } from '@/context/userContext';
 import Link from 'next/link';
 import RingLoader from 'react-spinners/RingLoader';
+import { isValidPassword, isValidUsername } from '@/utils/validation';
 
 const Login = () => {
   const router = useRouter();
@@ -44,10 +45,45 @@ const Login = () => {
       return;
     }
 
+    // Check if username is atleast 3 characters
+    if (username.length < 3) {
+      console.log('Username shorter than expected');
+      setError((prev) => ({ ...prev, username: 2 }));
+      return;
+    }
+
+    // Check if username is longer than 15 characters
+    if (username.length > 15) {
+      console.log('Username shorter than expected');
+      setError((prev) => ({ ...prev, username: 3 }));
+      return;
+    }
+
+    // Check if username contains only lowercase characters and numbers
+    if (!isValidUsername(username)) {
+      console.log('Username invalid');
+      setError((prev) => ({ ...prev, username: 4 }));
+      return;
+    }
+
     // Check if password is entered
     if (password == undefined || password.length <= 0) {
       console.log('Password empty');
       setError((prev) => ({ ...prev, password: 1 }));
+      return;
+    }
+
+    // Check if password is a valid password
+    if (!isValidPassword(password)) {
+      console.log('Password invalid');
+      setError((prev) => ({ ...prev, password: 2 }));
+      return;
+    }
+
+    // Check if password is longer than 20 characters
+    if (password.length > 20) {
+      console.log('Password longer than expected');
+      setError((prev) => ({ ...prev, password: 3 }));
       return;
     }
 
@@ -110,6 +146,7 @@ const Login = () => {
   return (
     <>
       {loading ? (
+        // Loading screen to be displayed when checking if user is logged in
         <div className="h-screen -pt-10 bg-hovercta bg-opacity-10 flex justify-center items-center">
           <RingLoader
             color={'#678b18'}
@@ -152,7 +189,21 @@ const Login = () => {
                   <ErrorStatement text={'Please enter your username.'} />
                 )}
                 {error.username == 2 && (
-                  <ErrorStatement text={'Please enter a valid username.'} />
+                  <ErrorStatement
+                    text={'Username must be atleast 3 characters long.'}
+                  />
+                )}
+                {error.username == 3 && (
+                  <ErrorStatement
+                    text={'Username can be at max 15 characters long.'}
+                  />
+                )}
+                {error.username == 4 && (
+                  <ErrorStatement
+                    text={
+                      'Username can only contain lowercase characters and numbers.'
+                    }
+                  />
                 )}
               </div>
 
@@ -170,8 +221,13 @@ const Login = () => {
                 {error.password == 2 && (
                   <ErrorStatement
                     text={
-                      'Password must be 8 characters long and must contain an uppercase letter, lowercase letter, number and special character.'
+                      'Password must be 8 characters long and must contain an uppercase letter, lowercase letter, number and special character. Cannot contain spaces.'
                     }
+                  />
+                )}
+                {error.password == 3 && (
+                  <ErrorStatement
+                    text={'Password can be at max 20 characters long.'}
                   />
                 )}
               </div>

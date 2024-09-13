@@ -70,6 +70,7 @@ const Logout = () => {
   return (
     <>
       {loading ? (
+        // Loading screen to be displayed when checking if user is logged in
         <div className="h-screen -pt-10 bg-hovercta bg-opacity-10 flex justify-center items-center">
           <RingLoader
             color={'#678b18'}
