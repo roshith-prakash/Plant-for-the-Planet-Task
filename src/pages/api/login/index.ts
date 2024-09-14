@@ -80,7 +80,7 @@ export default async function handler(
               path: '/',
               httpOnly: true,
               secure: true,
-              sameSite: 'none',
+              sameSite: 'strict',
               maxAge: 60 * 60 * 24,
             })
           );

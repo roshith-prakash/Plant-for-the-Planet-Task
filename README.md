@@ -31,3 +31,5 @@ The repository contains a Next JS Application with authentication functionality 
    2. npm run start
 4. The project will now be running locally. Access the project by going to http://localhost:3000 on your browser.
 5. If required, change the database link and JWT secret in the environment file.
+6. Signup as no users are present in the database. Once signed up, you shall be redirected to the profile page. You can choose to edit the information or simply logout.
+7. Once a user is present in the database, you will be able to login using the credentials added during signup. 
