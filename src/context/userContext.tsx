@@ -78,6 +78,15 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (data?.data?.user) {
       setDbUser(data?.data?.user);
+    } else {
+      setDbUser({
+        email: '',
+        username: '',
+        name: '',
+        gender: '',
+        description: null,
+        dateOfBirth: '',
+      });
     }
   }, [data?.data]);
 
