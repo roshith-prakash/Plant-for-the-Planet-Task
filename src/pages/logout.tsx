@@ -42,12 +42,16 @@ const Logout = () => {
     }
   }, [context?.dbUser?.username]);
 
+  // Function to log out user
   const logout = () => {
+    // Disable button
     setDisabled(true);
 
+    // Call logout API
     axios
       .get('/api/logout')
       .then((res) => {
+        // If response is returned, enable button, reset context values and send user to login page
         console.log(res);
         setDisabled(false);
         context?.setDbUser({
@@ -61,6 +65,7 @@ const Logout = () => {
         router.replace('/login');
       })
       .catch((err) => {
+        // If API errors, notify user that some error occured
         console.log(err);
         setDisabled(false);
         toast.error('Something went wrong.');

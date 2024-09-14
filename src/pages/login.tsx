@@ -40,55 +40,50 @@ const Login = () => {
 
     // Check if username is entered
     if (username == undefined || username.length <= 0) {
-      console.log('Username empty');
       setError((prev) => ({ ...prev, username: 1 }));
       return;
     }
 
     // Check if username is atleast 3 characters
     if (username.length < 3) {
-      console.log('Username shorter than expected');
       setError((prev) => ({ ...prev, username: 2 }));
       return;
     }
 
     // Check if username is longer than 15 characters
     if (username.length > 15) {
-      console.log('Username shorter than expected');
       setError((prev) => ({ ...prev, username: 3 }));
       return;
     }
 
     // Check if username contains only lowercase characters and numbers
     if (!isValidUsername(username)) {
-      console.log('Username invalid');
       setError((prev) => ({ ...prev, username: 4 }));
       return;
     }
 
     // Check if password is entered
     if (password == undefined || password.length <= 0) {
-      console.log('Password empty');
       setError((prev) => ({ ...prev, password: 1 }));
       return;
     }
 
     // Check if password is a valid password
     if (!isValidPassword(password)) {
-      console.log('Password invalid');
       setError((prev) => ({ ...prev, password: 2 }));
       return;
     }
 
     // Check if password is longer than 20 characters
     if (password.length > 20) {
-      console.log('Password longer than expected');
       setError((prev) => ({ ...prev, password: 3 }));
       return;
     }
 
+    // Disable button
     setDisabled(true);
 
+    // Call login API
     axios
       .post('/api/login', {
         user: {
@@ -107,6 +102,7 @@ const Login = () => {
         router.push('edit-profile');
       })
       .catch((err) => {
+        // Notify user if error occured
         setDisabled(false);
         console.log(err);
         console.log(err.response.data);
@@ -116,15 +112,17 @@ const Login = () => {
       });
   };
 
-  console.log(context?.dbUser);
-
   // Taking user to profile page if already logged in
   useEffect(() => {
+    // If context does not have data
     if (context?.dbUser?.username || context?.dbUser?.username?.length == 0) {
       setLoading(true);
+
+      // Call api to get user data (if cookie is present)
       axios
         .get('/api/getUser')
         .then((res) => {
+          // Data is present - redirect to profile page
           console.log(res);
           router.replace('/edit-profile');
           setTimeout(() => {
@@ -132,10 +130,12 @@ const Login = () => {
           }, 2000);
         })
         .catch((err) => {
+          // Data is not present - show Login page
           console.log(err);
           setLoading(false);
         });
     } else {
+      // Context has data - redirect to profile page
       router.replace('/edit-profile');
       setTimeout(() => {
         setLoading(false);

@@ -172,10 +172,12 @@ const EditProfile = () => {
       axios
         .get('/api/getUser')
         .then((res) => {
+          // If data is present, show page
           console.log(res);
           setLoading(false);
         })
         .catch((err) => {
+          // If data is not present, redirect to login page
           console.log(err);
           router.replace('/login');
           setTimeout(() => {

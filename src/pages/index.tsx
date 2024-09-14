@@ -1,6 +1,8 @@
 export default function Home() {
   return (
+    // Main div - flex on large screens
     <div className="min-h-screen flex flex-wrap lg:items-center bg-index3 bg-cover py-10 lg:py-0 gap-y-10 lg:gap-y-0">
+      {/* Image div - stop talking start planting */}
       <div className="w-full lg:flex-1 flex justify-center items-center">
         <img
           src="https://res.cloudinary.com/do8rpl9l4/image/upload/v1726066114/plant_txhxwu.png"
@@ -9,12 +11,16 @@ export default function Home() {
         ></img>
       </div>
 
+      {/* Right div */}
       <div className="w-full lg:flex-1 flex justify-center items-center">
+        {/* White box */}
         <div className="animate__animated animate__fadeInUp -translate-y-10 w-[90%] md:w-[80%] flex flex-col items-center gap-y-5 z-5 bg-white p-10 rounded-xl shadow-xl hover:scale-110 transition-all">
+          {/* Gradient text title */}
           <p className="text-transparent bg-gradient-to-b from-cta to-hovercta bg-clip-text text-center text-4xl py-1.5 pl-1 font-medium">
             Stop Talking, <span className="text-nowrap">Start Planting!</span>
           </p>
 
+          {/* Content */}
           <p className="mt-5 text-justify">
             Planting trees is one of the simplest yet most impactful actions we
             can take to combat climate change and restore our planet. As Plant

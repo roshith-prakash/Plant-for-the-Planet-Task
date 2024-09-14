@@ -73,110 +73,97 @@ const Signup = () => {
 
     // Check if Name is entered
     if (name == undefined || name.length <= 0) {
-      console.log('Name empty');
       setError((prev) => ({ ...prev, name: 1 }));
       return;
     }
 
     // Check if name is shorter than 3 characters
     if (name.length < 3) {
-      console.log('Name shorter than expected');
       setError((prev) => ({ ...prev, name: 2 }));
       return;
     }
 
     // Check if name is longer than 20 characters
     if (name.length > 20) {
-      console.log('Name longer than expected');
       setError((prev) => ({ ...prev, name: 3 }));
       return;
     }
 
     // Check if Email is entered
     if (email == undefined || email.length <= 0) {
-      console.log('Email empty');
       setError((prev) => ({ ...prev, email: 1 }));
       return;
     }
 
     // Check if email is a valid email
     if (!isValidEmail(email)) {
-      console.log('Invalid email address format');
       setError((prev) => ({ ...prev, email: 2 }));
       return;
     }
 
     // Check if username is entered
     if (username == undefined || username.length <= 0) {
-      console.log('Username empty');
       setError((prev) => ({ ...prev, username: 1 }));
       return;
     }
 
     // Check if username is atleast 3 characters
     if (username.length < 3) {
-      console.log('Username shorter than expected');
       setError((prev) => ({ ...prev, username: 2 }));
       return;
     }
 
     // Check if username is longer than 15 characters
     if (username.length > 15) {
-      console.log('Username shorter than expected');
       setError((prev) => ({ ...prev, username: 3 }));
       return;
     }
 
     // Check if username contains only lowercase characters and numbers
     if (!isValidUsername(username)) {
-      console.log('Username invalid');
       setError((prev) => ({ ...prev, username: 4 }));
       return;
     }
 
     // Check if password is entered
     if (password == undefined || password.length <= 0) {
-      console.log('Password empty');
       setError((prev) => ({ ...prev, password: 1 }));
       return;
     }
 
     // Check if password is a valid password
     if (!isValidPassword(password)) {
-      console.log('Password invalid');
       setError((prev) => ({ ...prev, password: 2 }));
       return;
     }
 
     // Check if password is longer than 20 characters
     if (password.length > 20) {
-      console.log('Password longer than expected');
       setError((prev) => ({ ...prev, password: 3 }));
       return;
     }
 
     // Check if Gender is selected
     if (gender == undefined) {
-      console.log('Password empty');
       setError((prev) => ({ ...prev, gender: 1 }));
       return;
     }
 
     // Check if Date is entered
     if (!dateOfBirth) {
-      console.log('Date not selected');
       setError((prev) => ({ ...prev, date: 1 }));
       return;
     }
 
     if (new Date() < new Date(dateOfBirth)) {
-      console.log('Invalid Date selected');
       setError((prev) => ({ ...prev, date: 2 }));
       return;
     }
 
+    // Disable button
     setDisabled(true);
 
+    // Call signup API
     axios
       .post('/api/signup', {
         user: {
@@ -201,6 +188,7 @@ const Signup = () => {
         router.push('edit-profile');
       })
       .catch((err) => {
+        // API errored - show notification
         setDisabled(false);
         console.log(err);
         console.log(err.response.data);
@@ -424,6 +412,7 @@ const Signup = () => {
                 />
               </div>
 
+              {/* Link to Login Page */}
               <p className="mt-5 text-center">
                 Already have an account?{' '}
                 <Link
