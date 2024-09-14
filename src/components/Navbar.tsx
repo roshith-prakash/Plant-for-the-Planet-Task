@@ -9,6 +9,7 @@ const Navbar = () => {
   const context = useDBUser();
 
   return (
+    // Navbar
     <div
       className={`relative top-0 w-full font-inter shadow-md overflow-hidden bg-white flex justify-between items-center px-5 lg:px-10 py-5 z-10 max-w-screen`}
     >
@@ -17,11 +18,13 @@ const Navbar = () => {
         className="animate__animated animate__fadeInLeft flex items-center gap-x-2"
         href="/"
       >
+        {/* Logo */}
         <img
           src="https://res.cloudinary.com/do8rpl9l4/image/upload/v1725986240/plant_d1wkt7.png"
           alt="Plant for the Planet"
           className="h-10 w-10 md:h-10 md:w-10 cursor-pointer bg-transparent -translate-y-0.5"
         ></img>
+        {/* Title */}
         <p className="mx-1 italic font-medium text-lg  md:text-xl text-textcta">
           Plant for the Planet
         </p>
@@ -101,19 +104,20 @@ const Navbar = () => {
               alt="Plant for the Planet"
               className="h-10 w-10 md:h-10 md:w-10 cursor-pointer bg-transparent -translate-y-0.5"
             ></img>
+            {/* Title */}
             <p className="mx-2 italic font-medium text-lg md:text-lg text-textcta">
               Plant for the Planet
             </p>
           </div>
-          {/* Close drawer */}
+          {/* Button to Close drawer */}
           <RxCross2
             onClick={() => setOpen(false)}
             className="cursor-pointer text-2xl text-ink"
           />
         </div>
+        {/* Links Section */}
         <div className="px-8 mt-20 text-2xl flex flex-col gap-y-3">
           {/* Link to Home */}
-
           <p className="my-2">
             <Link
               onClick={() => setOpen(false)}

@@ -7,6 +7,7 @@ import { UserProvider } from '@/context/userContext';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import 'animate.css';
 
+// Create a new query client for Tanstack query
 const queryClient = new QueryClient();
 
 export default function App({ Component, pageProps }: AppProps) {

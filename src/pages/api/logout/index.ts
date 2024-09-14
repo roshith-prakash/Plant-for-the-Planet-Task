@@ -10,6 +10,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Message>
 ) {
+  // Get cookies from request
   const cookies: { user?: string } = req.cookies;
 
   //  If cookie is not present

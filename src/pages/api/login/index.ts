@@ -29,6 +29,7 @@ export default async function handler(
     // Get user from request.
     const user = req.body?.user;
 
+    // Get User from DB
     const getUserPassword = await prisma.user.findUnique({
       where: {
         username: user?.username,
@@ -38,13 +39,17 @@ export default async function handler(
       },
     });
 
+    // If user is present
     if (getUserPassword) {
+      // Compare password sent in request body to user's password in DB
       const result = await bcrypt.compare(
         user?.password,
         getUserPassword?.password
       );
 
+      // IF password matches
       if (result) {
+        // Retrieve the user object from DB
         const userInDB = await prisma.user.findUnique({
           where: {
             username: user?.username,

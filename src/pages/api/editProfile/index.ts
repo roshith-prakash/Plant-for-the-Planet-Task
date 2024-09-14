@@ -23,8 +23,10 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data | Message>
 ) {
+  // Get cookies from request
   const cookies: { user?: string } = req.cookies;
 
+  // If user cookie is not present, send error as user is not signed in
   if (!cookies?.user) {
     res.status(404).send({ message: 'User not signed in.' });
     return;
