@@ -21,6 +21,9 @@ export default async function handler(
   }
 
   try {
+    // Making sure caching is not implemented
+    res.setHeader('Cache-Control', 'no-store');
+
     //Delete the cookie by having a small maxAge
     res.setHeader(
       'Set-Cookie',
