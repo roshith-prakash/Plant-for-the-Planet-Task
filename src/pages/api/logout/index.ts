@@ -26,6 +26,8 @@ export default async function handler(
       cookie.serialize('user', '', {
         path: '/',
         httpOnly: true,
+        secure: true,
+        sameSite: 'none',
         maxAge: -1,
       })
     );
