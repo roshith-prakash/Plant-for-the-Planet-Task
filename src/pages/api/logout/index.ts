@@ -29,7 +29,7 @@ export default async function handler(
         httpOnly: true,
         secure: true,
         sameSite: 'strict',
-        maxAge: 0,
+        maxAge: 20,
       })
     );
 
