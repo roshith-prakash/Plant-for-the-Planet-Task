@@ -58,9 +58,7 @@ const Logout = () => {
           description: null,
           dateOfBirth: '',
         });
-        setTimeout(() => {
-          router.replace('/login');
-        }, 1000);
+        router.replace('/login');
       })
       .catch((err) => {
         console.log(err);
