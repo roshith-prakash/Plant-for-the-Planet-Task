@@ -27,8 +27,9 @@ The repository contains a Next JS Application with authentication functionality 
 1. Clone the Project from Github.
 2. Install the dependencies by running the command "npm install".
 3. Run the following commands:
-   1. npm run build
-   2. npm run start
+   1. npx prisma generate
+   2. npm run build
+   3. npm run start
 4. The project will now be running locally. Access the project by going to http://localhost:3000 on your browser.
 5. If required, change the database link and JWT secret in the environment file.
 6. Signup as no users are present in the database. Once signed up, you shall be redirected to the profile page. You can choose to edit the information or simply logout.
